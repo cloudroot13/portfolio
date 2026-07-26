@@ -58,7 +58,7 @@ function Navbar() {
   }, []);
   return (
     <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${scrolled ? "py-3" : "py-5"}`}>
-      <nav className={`mx-auto flex max-w-7xl items-center justify-between px-5 transition-all lg:px-8 ${scrolled ? "glass rounded-2xl max-w-[1180px] py-3" : ""}`}>
+      <nav className={`mx-auto flex max-w-7xl items-center justify-between px-4 transition-all sm:px-5 lg:px-8 ${scrolled ? "glass rounded-2xl max-w-[1180px] py-3" : ""}`}>
         <a href="#home" className="font-mono text-sm font-bold tracking-[-.03em]"><span className="text-neon">&lt;</span> GC <span className="text-neon">/&gt;</span></a>
         <div className="hidden items-center gap-7 lg:flex">
           {nav.map(([label, id]) => <a className="nav-link" key={id} href={`#${id}`}>{label}</a>)}
@@ -66,7 +66,7 @@ function Navbar() {
         <a href="mailto:bielcavalcanti13@gmail.com" className="hidden items-center gap-2 rounded-full border border-neon/30 bg-neon/10 px-4 py-2 text-xs font-semibold text-neon sm:flex">Vamos conversar <ArrowUpRight size={14} /></a>
         <button aria-label="Abrir menu" className="lg:hidden" onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</button>
       </nav>
-      {open && <div className="glass mx-5 mt-2 rounded-2xl p-4 lg:hidden">{nav.map(([label,id]) => <a onClick={() => setOpen(false)} className="block border-b border-white/5 py-3 text-sm" key={id} href={`#${id}`}>{label}</a>)}</div>}
+      {open && <div className="glass mx-3 mt-2 max-h-[calc(100dvh-6rem)] overflow-y-auto rounded-2xl p-4 sm:mx-5 lg:hidden">{nav.map(([label,id]) => <a onClick={() => setOpen(false)} className="block border-b border-white/5 py-3 text-sm last:border-0" key={id} href={`#${id}`}>{label}</a>)}</div>}
     </header>
   );
 }
@@ -96,20 +96,20 @@ function Hero() {
   const [role, setRole] = useState(0);
   useEffect(() => { const t = setInterval(() => setRole(v => (v + 1) % roles.length), 2400); return () => clearInterval(t); }, []);
   return (
-    <section id="home" className="relative flex min-h-screen items-center overflow-hidden px-5 pb-16 pt-28 lg:px-8">
-      <div className="mx-auto grid w-full max-w-7xl items-center gap-12 lg:grid-cols-[1.15fr_.85fr]">
+    <section id="home" className="hero-section relative flex min-h-screen items-center overflow-hidden px-4 pb-14 pt-24 sm:px-5 sm:pb-16 sm:pt-28 lg:px-8">
+      <div className="mx-auto grid w-full max-w-7xl items-center gap-10 sm:gap-12 lg:grid-cols-[1.15fr_.85fr]">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .9 }}>
           <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[.04] px-3 py-2 text-xs text-white/60"><span className="relative flex h-2 w-2"><span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-neon opacity-75"/><span className="relative h-2 w-2 rounded-full bg-neon"/></span>Disponível para novas oportunidades</div>
           <p className="mb-4 font-mono text-sm text-neon">Olá, eu sou</p>
           <h1 className="hero-title">Gabriel<br/><span className="gradient-text">Cavalcanti.</span></h1>
           <div className="mt-6 flex min-h-8 items-center gap-3 text-lg text-white/55 md:text-xl"><span className="text-neon">→</span><motion.span key={role} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>{roles[role]}</motion.span></div>
           <p className="mt-7 max-w-xl text-base leading-7 text-white/50">Estudante de Ciência da Computação que transforma ideias em experiências digitais rápidas, intuitivas e memoráveis.</p>
-          <div className="mt-9 flex flex-wrap gap-3">
+          <div className="hero-actions mt-8 flex flex-wrap gap-3 sm:mt-9">
             <a href="#contato" className="button-primary">Entrar em contato <ArrowDownRight size={17}/></a>
             <a href="#projetos" className="button-secondary">Ver projetos <ArrowDownRight size={17}/></a>
           </div>
         </motion.div>
-        <motion.div initial={{ opacity: 0, scale: .85 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: .25, duration: 1 }} className="relative mx-auto aspect-square w-full max-w-[470px]">
+        <motion.div initial={{ opacity: 0, scale: .85 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: .25, duration: 1 }} className="hero-portrait relative mx-auto aspect-square w-full max-w-[470px]">
           <div className="profile-ring absolute inset-[8%] rounded-full"/>
           <div className="absolute inset-[15%] flex items-center justify-center rounded-full border border-white/10 bg-[#0b0e0d]/90 shadow-2xl">
             <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_50%_30%,rgba(0,255,136,.18),transparent_55%)]"/>
@@ -128,9 +128,9 @@ function About() {
   return <section id="sobre" className="section">
     <SectionTitle kicker="01 / Sobre" title={<>Construindo o futuro, <span className="text-white/30">uma linha por vez.</span></>} />
     <div className="grid gap-5 lg:grid-cols-[1.3fr_.7fr]">
-      <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={{once:true}}><MagneticCard className="min-h-[320px] p-7 md:p-10">
-        <Braces className="mb-16 text-neon" size={34}/>
-        <p className="max-w-2xl text-xl font-medium leading-8 text-white/85 md:text-2xl md:leading-9">Meu objetivo é adquirir experiência no campo da Ciência da Computação, aprofundar conhecimentos e desenvolver soluções modernas para empresas e pessoas.</p>
+      <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={{once:true}}><MagneticCard className="min-h-[280px] p-6 sm:p-7 md:min-h-[320px] md:p-10">
+        <Braces className="mb-10 text-neon sm:mb-16" size={34}/>
+        <p className="max-w-2xl text-lg font-medium leading-7 text-white/85 sm:text-xl sm:leading-8 md:text-2xl md:leading-9">Meu objetivo é adquirir experiência no campo da Ciência da Computação, aprofundar conhecimentos e desenvolver soluções modernas para empresas e pessoas.</p>
         <p className="mt-6 max-w-2xl leading-7 text-white/45">Gosto de criar aplicações modernas, interfaces intuitivas e sistemas completos — combinando técnica, curiosidade e atenção obsessiva aos detalhes.</p>
       </MagneticCard></motion.div>
       <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={{once:true}} transition={{delay:.15}} className="grid gap-5 sm:grid-cols-2 lg:grid-cols-1">
@@ -147,8 +147,8 @@ function Skills() {
     <motion.div variants={{show:{transition:{staggerChildren:.05}}}} initial="hidden" whileInView="show" viewport={{once:true}} className="mb-6 flex flex-wrap gap-2.5">
       {skillCloud.map((s,i)=><motion.div variants={reveal} key={s} className="skill-pill"><span className="font-mono text-[10px] text-neon">{String(i+1).padStart(2,"0")}</span>{s}</motion.div>)}
     </motion.div>
-    <div className="card p-6 md:p-9">
-      <div className="mb-8 flex items-center justify-between"><h3 className="text-lg font-semibold">Nível de proficiência</h3><span className="font-mono text-xs text-white/30">constantly_growing = true</span></div>
+    <div className="card p-5 sm:p-6 md:p-9">
+      <div className="mb-8 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between"><h3 className="text-lg font-semibold">Nível de proficiência</h3><span className="font-mono text-[10px] text-white/30 sm:text-xs">constantly_growing = true</span></div>
       <div className="grid gap-x-10 gap-y-6 md:grid-cols-2">
         {skills.map((s)=><SkillBar key={s.name} {...s}/>)}
       </div>
@@ -164,7 +164,7 @@ function SkillBar({name,value}:{name:string,value:number}) {
 function Education() {
   return <section id="formacao" className="section">
     <SectionTitle kicker="03 / Formação" title={<>Conhecimento em <span className="text-white/30">movimento.</span></>} />
-    <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={{once:true}} className="card relative overflow-hidden p-7 md:p-10">
+    <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={{once:true}} className="card relative overflow-hidden p-6 sm:p-7 md:p-10">
       <div className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-neon via-neon/30 to-transparent"/>
       <div className="grid gap-8 md:grid-cols-[180px_1fr_auto] md:items-center">
         <div><span className="font-mono text-sm text-neon">2025 — 2029</span><p className="mt-2 text-xs uppercase tracking-widest text-white/30">Em andamento</p></div>
@@ -211,7 +211,7 @@ function Projects() {
 function Contact() {
   return <section id="contato" className="section pb-14">
     <div className="contact-panel">
-      <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={{once:true}}>
+      <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={{once:true}} className="min-w-0">
         <Kicker>06 / Contato</Kicker>
         <h2 className="text-4xl font-semibold tracking-[-.05em] md:text-6xl">Tem uma ideia?<br/><span className="text-neon">Vamos construir.</span></h2>
         <p className="mt-6 max-w-lg text-white/50">Estou aberto a oportunidades, colaborações e boas conversas sobre tecnologia.</p>
