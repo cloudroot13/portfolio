@@ -13,7 +13,7 @@ const nav = [
   ["Cursos", "cursos"], ["Projetos", "projetos"], ["Contato", "contato"],
 ];
 
-const roles = ["Desenvolvedor Web", "Desenvolvedor Front-end", "Desenvolvedor Full Stack", "Desenvolvedor de Software"];
+const roles = ["Desenvolvedor Web", "Desenvolvedor Front-end", "Desenvolvedor Full Stack", "Desenvolvedor de Software", "Entusiasta em Cibersegurança"];
 
 const skills = [
   { name: "React", value: 90 }, { name: "HTML", value: 95 }, { name: "CSS", value: 90 },
@@ -21,7 +21,12 @@ const skills = [
   { name: "Java", value: 80 }, { name: "PHP", value: 75 }, { name: "MySQL", value: 85 },
 ];
 
-const skillCloud = ["HTML", "CSS", "JavaScript", "TypeScript", "React", "Tailwind CSS", "Java", "PHP", "MySQL", "Git", "GitHub", "APIs", "Banco de Dados", "POO", "Código limpo", "Metodologias Ágeis"];
+const skillCloud = [
+  "HTML", "CSS", "JavaScript", "TypeScript", "React", "Vue.js", "Tailwind CSS",
+  "Node.js", "Python", "C#", "Java", "PHP", "MySQL", "MongoDB", "Docker",
+  "Git", "GitHub", "VS Code", "APIs", "Banco de Dados", "POO",
+  "Cibersegurança", "Código limpo", "Metodologias Ágeis",
+];
 
 const courses = [
   ["Lógica", "Fundamentos de programação"], ["HTML", "Estruturas para a web"],
@@ -103,7 +108,7 @@ function Hero() {
           <p className="mb-4 font-mono text-sm text-neon">Olá, eu sou</p>
           <h1 className="hero-title">Gabriel<br/><span className="gradient-text">Cavalcanti.</span></h1>
           <div className="mt-6 flex min-h-8 items-center gap-3 text-lg text-white/55 md:text-xl"><span className="text-neon">→</span><motion.span key={role} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>{roles[role]}</motion.span></div>
-          <p className="mt-7 max-w-xl text-base leading-7 text-white/50">Estudante de Ciência da Computação que transforma ideias em experiências digitais rápidas, intuitivas e memoráveis.</p>
+          <p className="mt-7 max-w-xl text-base leading-7 text-white/50">Estudante de Ciência da Computação com experiência em cibersegurança, desenvolvimento web e criação de experiências digitais rápidas, intuitivas e memoráveis.</p>
           <div className="hero-actions mt-8 flex flex-wrap gap-3 sm:mt-9">
             <a href="#contato" className="button-primary">Entrar em contato <ArrowDownRight size={17}/></a>
             <a href="#projetos" className="button-secondary">Ver projetos <ArrowDownRight size={17}/></a>
@@ -131,11 +136,11 @@ function About() {
       <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={{once:true}}><MagneticCard className="min-h-[280px] p-6 sm:p-7 md:min-h-[320px] md:p-10">
         <Braces className="mb-10 text-neon sm:mb-16" size={34}/>
         <p className="max-w-2xl text-lg font-medium leading-7 text-white/85 sm:text-xl sm:leading-8 md:text-2xl md:leading-9">Meu objetivo é adquirir experiência no campo da Ciência da Computação, aprofundar conhecimentos e desenvolver soluções modernas para empresas e pessoas.</p>
-        <p className="mt-6 max-w-2xl leading-7 text-white/45">Gosto de criar aplicações modernas, interfaces intuitivas e sistemas completos — combinando técnica, curiosidade e atenção obsessiva aos detalhes.</p>
+        <p className="mt-6 max-w-2xl leading-7 text-white/45">Gosto de criar aplicações modernas, interfaces intuitivas e sistemas completos — combinando desenvolvimento, conhecimentos de cibersegurança, curiosidade e atenção aos detalhes.</p>
       </MagneticCard></motion.div>
       <motion.div variants={reveal} initial="hidden" whileInView="show" viewport={{once:true}} transition={{delay:.15}} className="grid gap-5 sm:grid-cols-2 lg:grid-cols-1">
         <MagneticCard className="flex items-end justify-between p-7"><div><MapPin className="mb-8 text-neon"/><span className="text-sm text-white/40">Baseado em</span><p className="mt-1 text-xl font-semibold">Brasília, DF</p></div><span className="text-4xl text-white/10">BR</span></MagneticCard>
-        <MagneticCard className="flex items-end justify-between p-7"><div><Zap className="mb-8 text-neon"/><span className="text-sm text-white/40">Foco atual</span><p className="mt-1 text-xl font-semibold">Full Stack</p></div><span className="h-3 w-3 animate-pulse rounded-full bg-neon shadow-[0_0_20px_#00ff88]"/></MagneticCard>
+        <MagneticCard className="flex items-end justify-between p-7"><div><Zap className="mb-8 text-neon"/><span className="text-sm text-white/40">Experiência</span><p className="mt-1 text-xl font-semibold">Cibersegurança · Xrat25</p></div><span className="h-3 w-3 animate-pulse rounded-full bg-neon shadow-[0_0_20px_#00ff88]"/></MagneticCard>
       </motion.div>
     </div>
   </section>;
@@ -143,7 +148,7 @@ function About() {
 
 function Skills() {
   return <section id="skills" className="section">
-    <SectionTitle kicker="02 / Competências" title={<>Stack que transforma <span className="text-white/30">ideias em produto.</span></>} copy="Tecnologias e fundamentos que uso para criar experiências digitais consistentes, escaláveis e agradáveis."/>
+    <SectionTitle kicker="02 / Competências" title={<>Stack que transforma <span className="text-white/30">ideias em produto.</span></>} copy="Tecnologias, ferramentas e fundamentos que venho estudando e utilizando em desenvolvimento de software e cibersegurança."/>
     <motion.div variants={{show:{transition:{staggerChildren:.05}}}} initial="hidden" whileInView="show" viewport={{once:true}} className="mb-6 flex flex-wrap gap-2.5">
       {skillCloud.map((s,i)=><motion.div variants={reveal} key={s} className="skill-pill"><span className="font-mono text-[10px] text-neon">{String(i+1).padStart(2,"0")}</span>{s}</motion.div>)}
     </motion.div>
@@ -189,7 +194,7 @@ function Courses() {
 
 function Stats() {
   return <section className="section pt-8"><div className="grid overflow-hidden rounded-3xl border border-white/[.08] bg-white/[.025] sm:grid-cols-2 lg:grid-cols-4">
-    {[["10+","Projetos"],["15+","Tecnologias"],["100%","Dedicação"],["24h","Aprendizado"]].map(([n,l],i)=><motion.div key={l} variants={reveal} initial="hidden" whileInView="show" viewport={{once:true}} transition={{delay:i*.08}} className="border-b border-white/[.07] p-8 last:border-0 sm:border-r lg:border-b-0"><p className="font-mono text-4xl font-bold tracking-tight text-neon">{n}</p><p className="mt-3 text-sm text-white/40">{l}</p></motion.div>)}
+    {[["10+","Projetos"],["20+","Tecnologias"],["100%","Dedicação"],["24h","Aprendizado"]].map(([n,l],i)=><motion.div key={l} variants={reveal} initial="hidden" whileInView="show" viewport={{once:true}} transition={{delay:i*.08}} className="border-b border-white/[.07] p-8 last:border-0 sm:border-r lg:border-b-0"><p className="font-mono text-4xl font-bold tracking-tight text-neon">{n}</p><p className="mt-3 text-sm text-white/40">{l}</p></motion.div>)}
   </div></section>;
 }
 
