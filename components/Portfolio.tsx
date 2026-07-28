@@ -36,6 +36,57 @@ const courses = [
   ["Ferramentas Digitais", "Ensina TI · 84 horas"],
 ];
 
+const projects = [
+  {
+    title: "INKHAUS",
+    category: "Portfólio para tatuador",
+    description: "Experiência institucional para um estúdio de tatuagem, valorizando estilos, identidade artística e agendamento.",
+    tags: ["Landing page", "Tattoo", "Responsivo"],
+    url: "https://tattoo-opal-nine.vercel.app/",
+    accent: "#ff7a45",
+  },
+  {
+    title: "INKTT Studio Admin",
+    category: "Sistema para estúdio",
+    description: "Painel administrativo profissional para organizar e acompanhar a operação de um estúdio de tatuagem.",
+    tags: ["Dashboard", "Gestão", "Sistema"],
+    url: "https://sistem-inktt.vercel.app/",
+    accent: "#9b7bff",
+  },
+  {
+    title: "SkillBridge",
+    category: "Startup de impacto social",
+    description: "Plataforma que conecta pessoas de baixa renda a cursos, microtrabalhos e oportunidades de geração de renda.",
+    tags: ["Startup", "Impacto social", "ONU"],
+    url: "https://startup-five-sandy.vercel.app/",
+    accent: "#00ff88",
+  },
+  {
+    title: "Dra. Marina Costa",
+    category: "Portfólio para psicóloga",
+    description: "Site profissional com abordagem acolhedora para apresentar especialidades, atendimento e contato.",
+    tags: ["Saúde", "Institucional", "Responsivo"],
+    url: "https://psicologo-dusky.vercel.app/",
+    accent: "#67c7ff",
+  },
+  {
+    title: "MóveisPro ERP",
+    category: "Sistema para móveis planejados",
+    description: "Sistema de gestão criado para centralizar processos e apoiar empresas do segmento de móveis planejados.",
+    tags: ["ERP", "Dashboard", "Gestão"],
+    url: "https://moveis-planejados-sis.vercel.app/#/login",
+    accent: "#ffc857",
+  },
+  {
+    title: "ÁTRIO",
+    category: "Site para construtora",
+    description: "Presença digital premium para uma construtora de alto padrão, com projetos, serviços e posicionamento institucional.",
+    tags: ["Construtora", "Institucional", "Premium"],
+    url: "https://construtora-institucional.vercel.app/",
+    accent: "#d6b98c",
+  },
+];
+
 const reveal: Variants = {
   hidden: { opacity: 0, y: 34, filter: "blur(12px)" },
   show: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: .75, ease: [0.22, 1, 0.36, 1] } },
@@ -200,16 +251,42 @@ function Stats() {
 
 function Projects() {
   return <section id="projetos" className="section">
-    <SectionTitle kicker="05 / Projetos" title={<>O que estou <span className="text-white/30">construindo.</span></>} copy="Uma seleção de projetos estará disponível em breve. Enquanto isso, acompanhe minha evolução pelo GitHub."/>
-    <motion.a href="https://github.com/cloudroot13" target="_blank" rel="noreferrer" variants={reveal} initial="hidden" whileInView="show" viewport={{once:true}} className="project-card group">
-      <div className="relative z-10 max-w-xl">
-        <span className="mb-8 inline-flex rounded-full border border-neon/20 bg-neon/10 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-neon">Em evolução contínua</span>
-        <h3 className="text-3xl font-semibold md:text-5xl">Próximo projeto<br/>em breve.</h3>
-        <p className="mt-5 leading-7 text-white/45">Repositórios, experimentos e aplicações completas sendo preparados para esta vitrine.</p>
-        <span className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-neon">Explorar GitHub <ArrowUpRight size={16}/></span>
-      </div>
-      <div className="relative z-10 mt-12 flex h-32 items-center justify-center rounded-2xl border border-white/[.07] bg-black/30 lg:mt-0 lg:h-64 lg:w-[42%]"><Github size={74} strokeWidth={1} className="text-white/15 transition-all duration-500 group-hover:scale-110 group-hover:text-neon/50"/></div>
-    </motion.a>
+    <SectionTitle kicker="05 / Projetos" title={<>Produtos que saíram <span className="text-white/30">do papel.</span></>} copy="Sites e sistemas desenvolvidos para diferentes segmentos, combinando experiência visual, organização e objetivos reais de negócio."/>
+    <motion.div variants={{show:{transition:{staggerChildren:.08}}}} initial="hidden" whileInView="show" viewport={{once:true, amount:.08}} className="projects-grid">
+      {projects.map((project, index) => (
+        <motion.a
+          key={project.title}
+          href={project.url}
+          target="_blank"
+          rel="noreferrer"
+          variants={reveal}
+          className="work-card group"
+          style={{ "--project-accent": project.accent } as React.CSSProperties}
+          aria-label={`Abrir projeto ${project.title}`}
+        >
+          <div className="work-preview" aria-hidden="true">
+            <div className="browser-bar"><span/><span/><span/><i>{new URL(project.url).hostname}</i></div>
+            <div className="preview-content">
+              <span className="preview-index">{String(index + 1).padStart(2, "0")}</span>
+              <Layers3 size={42} strokeWidth={1.2}/>
+              <strong>{project.title}</strong>
+            </div>
+          </div>
+          <div className="work-body">
+            <div className="mb-4 flex items-center justify-between gap-3">
+              <span className="font-mono text-[10px] uppercase tracking-[.16em] text-[var(--project-accent)]">{project.category}</span>
+              <span className="work-open"><ArrowUpRight size={17}/></span>
+            </div>
+            <h3 className="text-2xl font-semibold tracking-[-.035em]">{project.title}</h3>
+            <p className="mt-3 text-sm leading-6 text-white/45">{project.description}</p>
+            <div className="mt-6 flex flex-wrap gap-2">
+              {project.tags.map(tag => <span key={tag} className="project-tag">{tag}</span>)}
+            </div>
+            <span className="mt-7 inline-flex items-center gap-2 text-xs font-semibold text-white/75">Ver projeto online <ExternalLink size={14}/></span>
+          </div>
+        </motion.a>
+      ))}
+    </motion.div>
   </section>;
 }
 
